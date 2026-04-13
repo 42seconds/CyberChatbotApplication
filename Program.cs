@@ -14,6 +14,7 @@ namespace CyberChatbotApplication
     {
         static void Main(string[] args)
         {
+            // Create instance of CYBA chatbot and start the application
             CYBA cyba = new CYBA();
             cyba.StartCYBA();
         }
@@ -21,8 +22,9 @@ namespace CyberChatbotApplication
 
     class CYBA
     {
-        private string name;
+        private string name;                    // Stores the user's name
 
+        // Keyword-based responses (keyword, response)
         private string[,] responses = new string[,]
         {
             { "nice to meet you" , "Well I'm glad to meet you too. I am CYBA, your Cybersecurity Awareness Assistant."},
@@ -42,15 +44,17 @@ namespace CyberChatbotApplication
 
         public void StartCYBA()
         {
-            logo();
+            logo();                                 // Display the CYBA logo
 
+            // Print welcome header
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("\n================================================================================================");
             Console.WriteLine("                  WELCOME TO CYBERSECURITY AWARENESS ASSISTANT");
             Console.WriteLine("================================================================================================");
 
-            PlayGreeting();
+            PlayGreeting();                         // Play voice greeting if file exists
 
+            // Get user's name with validation
             Console.Write("\n Please enter your name : ");
             name = Console.ReadLine()?.Trim();
 
@@ -67,9 +71,10 @@ namespace CyberChatbotApplication
             Console.WriteLine("\n Type 'exit' to quit.\n");
             Console.ForegroundColor = ConsoleColor.White;
 
-            RunCYBA();
+            RunCYBA();                              // Start the main chat loop
         }
 
+        // Main chat loop - handles user input and responses
         private void RunCYBA()
         {
             while (true)
@@ -97,11 +102,12 @@ namespace CyberChatbotApplication
 
                 Console.Write(" CYBA : ");
                 Console.ForegroundColor = ConsoleColor.Green;
-                delayEffect(response);
+                delayEffect(response);              // Show response with typing effect
                 Console.ForegroundColor = ConsoleColor.White;
             }
         }
 
+        // Searches for matching keywords in user input and returns appropriate response
         private string FindKeywords(string input)
         {
             string cleanInput = input.ToLower().Trim();
@@ -117,16 +123,18 @@ namespace CyberChatbotApplication
             return "Sorry, I didn't understand that. Can you rephrase?";
         }
 
+        // Typing effect - prints text character by character
         private void delayEffect(string text)
         {
             foreach (char c in text)
             {
                 Console.Write(c);
-                Thread.Sleep(30);
+                Thread.Sleep(30);                   // Adjust speed here if needed (lower = faster)
             }
             Console.WriteLine();
         }
 
+        // Plays greeting sound if the wav file exists
         private void PlayGreeting()
         {
             string path = @"C:\Users\RC_Student_lab\source\repos\CyberChatbotApplication\voice_folder\greeting.wav";
@@ -137,6 +145,7 @@ namespace CyberChatbotApplication
             }
         }
 
+        // Displays the new CYBA logo (original logo removed and replaced)
         private void logo()
         {
             Console.ForegroundColor = ConsoleColor.Cyan;
